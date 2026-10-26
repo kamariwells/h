@@ -4,116 +4,230 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Body Work Lab | Client Payments</title>
+
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;font-family:Arial,Helvetica,sans-serif}
-body{background:#00263c;color:white}
-.page{
-  position:relative;isolation:isolate;overflow:hidden;
-  width:100%;max-width:480px;height:100vh;height:100svh;
-  min-height:650px;margin:auto;text-align:center;
-  background:linear-gradient(180deg,#25b9df 0%,#087da2 28%,#034c6a 58%,#001b2d 100%);
+* {
+  box-sizing: border-box;
 }
-.ocean{
-  position:absolute;z-index:-2;inset:0;overflow:hidden;
+
+html, body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #00283d;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+
   background:
-    radial-gradient(ellipse at 50% 0%,#e0fbff 0%,#75e1f7 6%,transparent 26%),
-    radial-gradient(ellipse at 12% 15%,#2ab9dc 0%,transparent 38%),
-    radial-gradient(ellipse at 90% 20%,#087da6 0%,transparent 40%),
-    linear-gradient(180deg,#25b9df 0%,#087da2 28%,#034c6a 58%,#001b2d 100%);
+    radial-gradient(ellipse at 50% 0%, #d4faff 0%, #65d9f4 8%, transparent 29%),
+    radial-gradient(ellipse at 15% 18%, #168eb8, transparent 45%),
+    linear-gradient(180deg, #087fa9, #034d6b 45%, #001727);
 }
-.surface{
-  position:absolute;inset:0 0 auto;height:35%;
-  background:repeating-radial-gradient(
-    ellipse at 50% -12%,transparent 0 9px,#e4fcff65 11px,
-    transparent 14px,transparent 22px
-  );
-  filter:blur(2px);opacity:.8;
-}
-.sunbeams{
-  position:absolute;inset:0;
-  background:repeating-conic-gradient(
-    from 245deg at 50% -4%,
-    transparent 0deg,#e4fbff35 4deg,
-    transparent 8deg,#bcefff20 12deg,transparent 16deg
-  );
-  filter:blur(9px);
-}
-.deepwater{
-  position:absolute;inset:30% 0 0;
+
+/* Underwater light and ripples */
+.water {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
   background:
-    radial-gradient(ellipse at 5% 95%,#0091ae80,transparent 43%),
-    radial-gradient(ellipse at 95% 90%,#006a8a90,transparent 45%),
-    linear-gradient(180deg,transparent,#001522ed);
+    repeating-radial-gradient(
+      ellipse at 50% -10%,
+      transparent 0 12px,
+      #dffaff45 14px,
+      transparent 18px
+    ),
+    repeating-linear-gradient(
+      175deg,
+      transparent 0 5px,
+      #e9fcff0c 6px,
+      transparent 9px
+    );
 }
-.bubble{
-  position:absolute;border:1px solid #d7faffbb;border-radius:50%;
-  box-shadow:inset 2px 2px 4px #ffffff66,0 0 8px #b9f4ff55;
+
+.rays {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background: repeating-conic-gradient(
+    from 245deg at 50% 0%,
+    transparent 0deg,
+    #e0fbff25 4deg,
+    transparent 9deg
+  );
+
+  filter: blur(8px);
 }
-.b1{width:9px;height:9px;top:63%;left:12%}
-.b2{width:15px;height:15px;top:60%;right:12%}
-.b3{width:20px;height:20px;top:83%;left:8%}
-.b4{width:8px;height:8px;top:87%;right:16%}
-.b5{width:6px;height:6px;top:74%;left:24%}
-.content{position:relative;height:100%;padding:env(safe-area-inset-top) 20px 0}
-.logo{
-  position:absolute;top:3%;left:0;width:100%;
-  font-size:19px;font-weight:300;letter-spacing:17px;padding-left:17px;
+
+.depth {
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(ellipse at 0% 100%, #0087a877, transparent 48%),
+    radial-gradient(ellipse at 100% 100%, #00678988, transparent 48%),
+    linear-gradient(0deg, #001522f5, transparent);
 }
-.brand{position:absolute;top:27%;left:0;width:100%;padding:0 8px}
-h1{
-  margin:0;font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(43px,11vw,58px);line-height:1.02;
-  letter-spacing:-2px;font-weight:700;
-  text-shadow:0 2px 12px #00263c40;
+
+.bubble {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #d9faffaa;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #c8f7ff66;
+  pointer-events: none;
 }
-.tagline{
-  margin:19px 0 0;font-size:clamp(17px,4.8vw,23px);
-  font-weight:300;white-space:nowrap;
+
+.b1 { width: 9px; height: 9px; top: 62%; left: 12%; }
+.b2 { width: 15px; height: 15px; top: 58%; right: 10%; }
+.b3 { width: 20px; height: 20px; bottom: 7%; left: 5%; }
+.b4 { width: 7px; height: 7px; bottom: 17%; right: 14%; }
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
 }
-.payment{position:absolute;top:59%;left:0;width:100%;padding:0 5%}
-.label{margin-bottom:19px;padding-left:8px;font-size:13px;letter-spacing:8px;white-space:nowrap}
-.pay{
-  display:flex;align-items:center;justify-content:center;gap:15px;
-  width:100%;min-height:76px;padding:12px;
-  border:2px solid white;border-radius:100px;
-  color:white;text-decoration:none;background:#ffffff12;
-  box-shadow:0 0 22px #d5faff30;
+
+.logo {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  width: 100%;
+  padding-left: 17px;
+  font-size: 19px;
+  font-weight: 300;
+  letter-spacing: 17px;
 }
-.pay span{font-size:clamp(21px,6vw,28px);font-weight:600;letter-spacing:4px;white-space:nowrap}
-.apple{width:34px;height:40px;fill:white;flex-shrink:0}
-.footer{margin-top:20px;font-size:11px;letter-spacing:4px;white-space:nowrap}
-@media(max-height:700px){
-  .brand{top:24%}
-  .payment{top:56%}
-  .label{margin-bottom:12px}
-  .pay{min-height:65px}
-  .footer{margin-top:13px}
+
+.brand {
+  position: absolute;
+  top: 34%;
+  left: 0;
+  width: 100%;
+  padding: 0 8px;
 }
-@media(max-width:360px){
-  .payment{padding:0 4%}
-  .label{letter-spacing:6px}
-  .pay{gap:9px;min-height:68px}
-  .pay span{letter-spacing:3px}
-  .footer{font-size:10px;letter-spacing:3px}
+
+h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(43px, 11vw, 58px);
+  line-height: 1.03;
+  letter-spacing: -2px;
+  font-weight: 700;
+}
+
+.tagline {
+  margin: 20px 0 0;
+  font-size: clamp(17px, 4.8vw, 23px);
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.payment {
+  position: absolute;
+  top: 65%;
+  left: 0;
+  width: 100%;
+  padding: 0 5%;
+}
+
+.label {
+  margin-bottom: 22px;
+  font-size: 13px;
+  letter-spacing: 8px;
+  white-space: nowrap;
+}
+
+.pay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 82px;
+  padding: 12px;
+  border: 2px solid white;
+  border-radius: 100px;
+  color: white;
+  text-decoration: none;
+  background: #ffffff16;
+  box-shadow: 0 0 22px #d5faff30;
+}
+
+.pay span {
+  font-size: clamp(21px, 6vw, 28px);
+  font-weight: 600;
+  letter-spacing: 4px;
+  white-space: nowrap;
+}
+
+.apple {
+  width: 35px;
+  height: 41px;
+  fill: white;
+  flex-shrink: 0;
+}
+
+.footer {
+  margin-top: 22px;
+  font-size: 11px;
+  letter-spacing: 4px;
+  white-space: nowrap;
+}
+
+@media (max-height: 700px) {
+  .logo { top: 6%; }
+  .brand { top: 26%; }
+  .tagline { margin-top: 14px; }
+  .payment { top: 56%; }
+  .label { margin-bottom: 12px; }
+  .pay { min-height: 65px; }
+  .footer { margin-top: 13px; }
+}
+
+@media (max-width: 360px) {
+  .label { letter-spacing: 5px; }
+  .pay { gap: 9px; min-height: 70px; }
+  .pay span { letter-spacing: 3px; }
+  .footer { font-size: 10px; letter-spacing: 3px; }
 }
 </style>
 </head>
+
 <body>
 <main class="page">
-  <div class="ocean">
-    <div class="surface"></div>
-    <div class="sunbeams"></div>
-    <div class="deepwater"></div>
-  </div>
+
+  <div class="water"></div>
+  <div class="rays"></div>
+  <div class="depth"></div>
 
   <div class="bubble b1"></div>
   <div class="bubble b2"></div>
   <div class="bubble b3"></div>
   <div class="bubble b4"></div>
-  <div class="bubble b5"></div>
 
   <div class="content">
+
     <div class="logo">T B L</div>
 
     <section class="brand">
@@ -123,16 +237,24 @@ h1{
 
     <section class="payment">
       <div class="label">CLIENT PAYMENTS</div>
-      <a class="pay"
-         href="sms:+12134556794?body=Hi%21%20I%27d%20like%20to%20take%20care%20of%20my%20TBL%20service%20payment%20through%20Apple%20Cash."
-         aria-label="Arrange payment through Apple Cash">
+
+      <a
+        class="pay"
+        href="sms:+12134556794?body=Hi%21%20I%27d%20like%20to%20take%20care%20of%20my%20TBL%20service%20payment%20through%20Apple%20Cash."
+        aria-label="Arrange payment through Apple Cash"
+      >
         <span>APPLE CASH</span>
-        <svg class="apple" viewBox="0 0 24 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+        <svg class="apple" viewBox="0 0 24 28"
+             xmlns="http://www.w3.org/2000/svg"
+             aria-hidden="true">
           <path d="M19.7 14.9c0-3.2 2.6-4.7 2.7-4.8a5.9 5.9 0 0 0-4.6-2.5c-1.9-.2-3.7 1.1-4.7 1.1-1 0-2.5-1.1-4.1-1.1A6.1 6.1 0 0 0 3.8 11c-2.2 3.8-.6 9.4 1.5 12.5 1 1.5 2.2 3.1 3.7 3.1 1.5-.1 2.1-1 4-1s2.5 1 4 1 2.6-1.5 3.6-3a13 13 0 0 0 1.6-3.3 5.5 5.5 0 0 1-2.5-5.4ZM16.6 5.5A5.8 5.8 0 0 0 18 1.3a5.9 5.9 0 0 0-3.8 2 5.4 5.4 0 0 0-1.4 4 5 5 0 0 0 3.8-1.8Z"/>
         </svg>
       </a>
+
       <div class="footer">TAP TO ARRANGE PAYMENT</div>
     </section>
+
   </div>
 </main>
 </body>
